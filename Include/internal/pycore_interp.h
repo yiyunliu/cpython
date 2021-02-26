@@ -99,6 +99,7 @@ struct _Py_float_state {
     PyFloatObject *free_list;
 };
 
+#define PyTuple_MAXSAVESIZE 1
 /* Speed optimization to avoid frequent malloc/free of small tuples */
 #ifndef PyTuple_MAXSAVESIZE
    // Largest tuple to save on free list
@@ -120,6 +121,7 @@ struct _Py_tuple_state {
 };
 
 /* Empty list reuse scheme to save calls to malloc and free */
+#define PyList_MAXFREELIST 1
 #ifndef PyList_MAXFREELIST
 #  define PyList_MAXFREELIST 80
 #endif
@@ -129,6 +131,7 @@ struct _Py_list_state {
     int numfree;
 };
 
+#define PyDict_MAXFREELIST 1
 #ifndef PyDict_MAXFREELIST
 #  define PyDict_MAXFREELIST 80
 #endif
@@ -147,6 +150,7 @@ struct _Py_frame_state {
     int numfree;
 };
 
+#define _PyAsyncGen_MAXFREELIST 1
 #ifndef _PyAsyncGen_MAXFREELIST
 #  define _PyAsyncGen_MAXFREELIST 80
 #endif
@@ -199,7 +203,7 @@ struct type_cache_entry {
     PyObject *value;       // borrowed reference or NULL
 };
 
-#define MCACHE_SIZE_EXP 12
+#define MCACHE_SIZE_EXP 0
 #define MCACHE_STATS 0
 
 struct type_cache {
@@ -214,8 +218,9 @@ struct type_cache {
 
 /* interpreter state */
 
-#define _PY_NSMALLPOSINTS           257
-#define _PY_NSMALLNEGINTS           5
+#define _PY_NSMALLPOSINTS           2
+/* #define _PY_NSMALLPOSINTS           257 */
+#define _PY_NSMALLNEGINTS           0
 
 // _PyLong_GetZero() and _PyLong_GetOne() must always be available
 #if _PY_NSMALLPOSINTS < 2
