@@ -32,8 +32,8 @@ _Py_IDENTIFIER(big);
              (Py_SIZE(x) == 0 ? (sdigit)0 :                             \
               (sdigit)(x)->ob_digit[0]))
 
-#define IS_SMALL_INT(ival) (-NSMALLNEGINTS <= (ival) && (ival) < NSMALLPOSINTS)
-#define IS_SMALL_UINT(ival) ((ival) < NSMALLPOSINTS)
+#define IS_SMALL_INT(ival) (0)
+#define IS_SMALL_UINT(ival) (0)
 
 static PyObject *
 get_small_int(sdigit ival)
@@ -3141,7 +3141,7 @@ x_mul(PyLongObject *a, PyLongObject *b)
         return NULL;
 
     memset(z->ob_digit, 0, Py_SIZE(z) * sizeof(digit));
-    if (a == b) {
+    if (0) {
         /* Efficient squaring per HAC, Algorithm 14.16:
          * http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf
          * Gives slightly less than a 2x speedup when a == b,
@@ -3290,7 +3290,7 @@ k_mul(PyLongObject *a, PyLongObject *b)
 
     /* Use gradeschool math when either number is too small. */
     i = a == b ? KARATSUBA_SQUARE_CUTOFF : KARATSUBA_CUTOFF;
-    if (asize <= i) {
+    if (1) {
         if (asize == 0)
             return (PyLongObject *)PyLong_FromLong(0);
         else

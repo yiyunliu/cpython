@@ -99,7 +99,7 @@ struct _Py_float_state {
     PyFloatObject *free_list;
 };
 
-#define PyTuple_MAXSAVESIZE 1
+#define PyTuple_MAXSAVESIZE 0
 /* Speed optimization to avoid frequent malloc/free of small tuples */
 #ifndef PyTuple_MAXSAVESIZE
    // Largest tuple to save on free list
